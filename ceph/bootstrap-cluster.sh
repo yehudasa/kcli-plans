@@ -19,4 +19,8 @@ fsid=$(cat /etc/ceph/ceph.conf | grep fsid | awk '{ print $3}')
   ssh-copy-id -f -i /etc/ceph/ceph.pub  -o StrictHostKeyChecking=no root@{{ prefix }}-node-0{{ number }}.{{ domain }}
   cephadm shell --fsid $fsid -c /etc/ceph/ceph.conf -k /etc/ceph/ceph.client.admin.keyring ceph orch host add {{ prefix }}-node-0{{ number }}.{{ domain }}
 {% endfor %}
+{% if nodes > 0 and nodes < 3 %}
+  cephadm shell --fsid $fsid -c /etc/ceph/ceph.conf -k /etc/ceph/ceph.client.admin.keyring ceph config set global osd_pool_default_size {{ nodes }}
+  cephadm shell --fsid $fsid -c /etc/ceph/ceph.conf -k /etc/ceph/ceph.client.admin.keyring ceph config set global osd_pool_default_min_size {{ nodes }}
+{% endif %}
 cephadm shell --fsid $fsid -c /etc/ceph/ceph.conf -k /etc/ceph/ceph.client.admin.keyring ceph orch apply osd --all-available-devices
