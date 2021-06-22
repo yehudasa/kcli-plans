@@ -2,7 +2,7 @@ parameters:
  nodes: 3
  pool: default
  network: default
- domain: localdomain
+ domain: cephlab.com
  prefix: ceph
  numcpus: 2
  memory: 4096
