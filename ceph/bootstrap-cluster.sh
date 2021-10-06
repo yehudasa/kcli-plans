@@ -1,3 +1,4 @@
+dnf install python3-remoto -y
 export PATH=/root/bin:$PATH
 mkdir /root/bin
 {% if ceph_dev_folder is defined %}
