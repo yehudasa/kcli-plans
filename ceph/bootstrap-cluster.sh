@@ -1,4 +1,6 @@
-dnf install python3-remoto -y
+mkdir /root/bootstrap
+dnf install python3-remoto -y 2>&1 | tee /root/bootstrap/dnf.log
+dnf install firewalld -y 2>&1 | tee -a /root/bootstrap/dnf.log
 export PATH=/root/bin:$PATH
 mkdir /root/bin
 {% if ceph_dev_folder is defined %}
