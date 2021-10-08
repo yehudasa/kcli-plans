@@ -12,6 +12,7 @@ mkdir /root/bin
 chmod +x /root/bin/cephadm
 mkdir -p /etc/ceph
 mon_ip=$(ifconfig eth0  | grep 'inet ' | awk '{ print $2}')
+cephadm add-repo --release pacific 2>&1 | tee -a /root/bootstrap/cephadm.log
 {% if ceph_dev_folder is defined %}
   cephadm bootstrap --mon-ip $mon_ip --initial-dashboard-password {{ admin_password }} --allow-fqdn-hostname --dashboard-password-noupdate --shared_ceph_folder /mnt/{{ ceph_dev_folder }}
 {% else %}
