@@ -6,7 +6,7 @@ parameters:
  prefix: ceph
  numcpus: 2
  memory: 4096
- image: fedora32
+ image: fedora34
  notify: false
  admin_password: password
  disks:
